@@ -1,6 +1,11 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
+// const verify = (req, res, next) => {
+//   next();
+// }
+
+
 const verify = (req, res, next) => {
   try {
     // console.log("req.headers", req.headers);

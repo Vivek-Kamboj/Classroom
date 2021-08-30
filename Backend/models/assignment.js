@@ -8,6 +8,10 @@ const AssignmentSchema = mongoose.Schema({
   description: {
     type: String,
   },
+  subject:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Subject",
+  },
   postedTime: {
     type: Date,
     required: [true, "Assignment post-date is required"],
