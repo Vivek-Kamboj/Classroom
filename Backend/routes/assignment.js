@@ -10,6 +10,8 @@ router.get("/:assignmentId", mw.auth.verify, ctrl.assignment.get);
 // Get Assignments list for a subject
 router.get("/", mw.auth.verify, ctrl.assignment.assList);
 // Post Assignment response
+router.post("/:assignmentId/response", mw.auth.verify, ctrl.assignment.response);
+// Give marks
 // Update Assignment
 router.put("/:assignmentId", mw.auth.verify, ctrl.assignment.update);
 // Delete Assignment
