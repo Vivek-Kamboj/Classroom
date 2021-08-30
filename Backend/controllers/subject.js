@@ -42,6 +42,74 @@ const get = async (req, res) => {
   }
 };
 
+
+const join = async(req, res)=>{
+  const {code, studentId}=req.body;
+  if(!code || !studentId){
+    return res.status(400).json({ message: "Code is required" });
+  }
+  try {
+    await db.Subject.findOne({code:code}).exec(async(err, subject)=>{
+      if(err)
+      {
+        console.log(err);
+        return res.status(500).json({
+          message: "Something went wrong when trying to join a subject",
+        });
+      }
+      await db.User.findById(studentId).exec(async(err,student)=>{
+        if(err){
+          console.log(err);
+          return res.status(500).json({
+            message: "Something went wrong when trying to join a subject",
+          });
+        }
+        var studentsubj=[], subjectstudents=[];
+        if(subject.students){
+          subjectstudents=[...subject.students];
+        }
+        
+        for (let i = 0; i < subjectstudents.length; i++) {
+          if(subjectstudents[i].toString()=== student._id.toString()){
+            return res.status(200).json({
+              message: "Already joined subject",
+            });
+          }
+        }
+        subjectstudents.push(student);
+        subject.students=subjectstudents;
+          await subject.save((err)=>{
+            if(err)
+            {console.log(err);
+            return res.status(500).json({
+              message: "Something went wrong when trying to join a subject",
+            });}
+          });
+        if(student.subject)
+        {studentsubj=[...student.subject]}
+        studentsubj.push(subject);
+        student.subjects=studentsubj;
+        await student.save((err)=>{
+          if(err)
+          {console.log(err);
+          return res.status(500).json({
+            message: "Something went wrong when trying to join a subject",
+          });}
+        })
+        
+        res.status(200).json({
+          message:"Joined Subject",
+        });
+      })
+    })
+  } catch (error) {
+    console.log("Server error.");
+    return res.status(500).json({
+      message: "Something went wrong when trying to join a subject",
+    });
+  }
+}
+
 const update = async (req, res) => {
   try {
     var updatedSubject = await db.Subject.findByIdAndUpdate(
@@ -82,6 +150,7 @@ const deleteSubject = async (req, res) => {
 module.exports = {
   create,
   get,
+  join,
   update,
   deleteSubject,
 };

@@ -8,9 +8,10 @@ router.post("/", mw.auth.verify, ctrl.subject.create);
 // Get Subject data
 router.get("/:subjectId", mw.auth.verify, ctrl.subject.get);
 // Join Subject
+router.post("/join", mw.auth.verify, ctrl.subject.join);
 // Update Subject
 router.put("/:subjectId", mw.auth.verify, ctrl.subject.update);
 // Delete Subject
-router.delete("/:subjectId", mw.auth.verify, ctrl.subject.deleteSubject);
+router.delete("/:subjectId", mw.auth.verify, ctrl.subject.deleteSubject);// baccha hai!
 
 module.exports = router;
