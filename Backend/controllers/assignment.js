@@ -150,6 +150,49 @@ const response=async(req, res)=>{
   }
 
 }
+const mark=async(req, res)=>{
+  const {marks, studentId}=req.body;
+  if(!marks){
+    return res.status(400).json({ message: "Marks are required" });
+  }
+  try {
+    await db.Assignment.findById(req.params.assignmentId).exec(async(err, foundAssignment)=>{
+      if(err){
+        return res.status(500).json({
+          message: "Something went wrong while submitting response's marks. Try again!",
+        });
+      }
+      var responses=[];
+          if(foundAssignment.studentResponses){
+          responses=[...foundAssignment.studentResponses];
+        }
+        for (let i = 0; i < responses.length; i++) {
+          if(responses[i].studentRef.toString()=== studentId.toString()){
+            responses[i].marks=marks;
+            break;
+          }
+        }
+        foundAssignment.studentResponses=responses;
+        foundAssignment.save((err)=>{
+          if(err){
+            return res.status(500).json({
+              message: "Something went wrong while submitting response's marks. Try again!",
+            });
+          }
+          res.status(200).json({
+            message: "Response Added",
+          });
+        })
+    })
+  } catch (error) {
+    console.log("Server error.");
+    return res.status(500).json({
+      message: "Something went wrong while submitting response. Try again!",
+    });
+  }
+
+  
+}
 
 const update = async (req, res) => {
   try {
@@ -193,6 +236,7 @@ module.exports = {
   get,
   assList,
   response,
+  mark,
   update,
   deleteAssignment,
 };
