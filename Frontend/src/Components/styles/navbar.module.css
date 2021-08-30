@@ -1,0 +1,31 @@
+.brand {
+  margin-left: 3%;
+}
+
+.items {
+  margin-right: 8%;
+}
+
+.item {
+  padding-right: 13%;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #eed202;
+}
+
+.navLink:hover {
+  text-decoration: none;
+  color: #efcc00;
+}
+
+.logoutLink {
+  color: darkgrey;
+  text-decoration: none;
+}
+
+.logoutLink:hover {
+  text-decoration: none;
+  color: darkgray;
+}

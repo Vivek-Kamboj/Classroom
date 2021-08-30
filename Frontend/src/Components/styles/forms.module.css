@@ -1,0 +1,37 @@
+.login {
+  min-height: 100vh;
+}
+
+.bgImage {
+  background-image: url("https://elearningindustry.com/wp-content/uploads/2015/10/top-10-google-classroom-best-practices.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.loginHeading {
+  font-weight: 300;
+}
+
+.btnLogin {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
+
+.entire {
+  padding: 0 10% 0 10%;
+}
+
+.joinClass {
+  padding: 3% !important;
+  margin: 3% 18% 5% 18% !important;
+}
+
+.createClass {
+  padding: 1% !important;
+  margin: 3% 18% 2% 18% !important;
+}
+
+.radio {
+  padding-right: 20%;
+}
