@@ -8,6 +8,7 @@ router.post("/", mw.auth.verify, ctrl.assignment.create);
 // Get Assignment details
 router.get("/:assignmentId", mw.auth.verify, ctrl.assignment.get);
 // Get Assignments list for a subject
+router.get("/", mw.auth.verify, ctrl.assignment.assList);
 // Post Assignment response
 // Update Assignment
 router.put("/:assignmentId", mw.auth.verify, ctrl.assignment.update);
