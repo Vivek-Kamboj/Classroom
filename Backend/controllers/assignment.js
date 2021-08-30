@@ -62,6 +62,29 @@ const get = async (req, res) => {
   }
 };
 
+const assList=async(req, res)=>{
+  try {
+    await db.Subject.findOne({ _id: req.query.subjectId }).populate("assignments").exec(
+      function (err, subject) {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({
+            message:
+              "Something went wrong when trying to get assignment details",
+          });
+        } else {
+          res.status(200).json(subject.assignments);
+        }
+      }
+    );
+  } catch (err) {
+    console.log("Server error.");
+    return res.status(500).json({
+      message: "Something went wrong when trying to get assignment details",
+    });
+  }
+}
+
 const update = async (req, res) => {
   try {
     var updatedAssignment = await db.Assignment.findByIdAndUpdate(
@@ -102,6 +125,7 @@ const deleteAssignment = async (req, res) => {
 module.exports = {
   create,
   get,
+  assList,
   update,
   deleteAssignment,
 };
