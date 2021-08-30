@@ -4,7 +4,7 @@ const ctrl = require("../controllers");
 const mw = require("../middleware");
 
 // Sign up
-router.post("/signup", ctrl.user.signup); // login issme bacha hai!
+router.post("/signup", ctrl.user.signup);
 // Sign IN
 router.post("/signin", ctrl.user.signIn);
 // Get Dashbord of User

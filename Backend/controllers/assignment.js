@@ -1,21 +1,36 @@
-const { assignment } = require(".");
 const db = require("../models");
 
 const create = async (req, res) => {
-  var assignment = { ...req.body };
+  var assignment = { ...req.body, studentResponses: [] };
   if (
     !assignment.name ||
     !assignment.postedTime ||
     !assignment.dueTime ||
-    !assignment.maxMarks
+    !assignment.maxMarks ||
+    !assignment.subject
   ) {
     return res.status(400).json({ message: "All fields are required" });
   }
   try {
+    var subject=await db.Subject.findById(assignment.subject);
+    // console.log(subject);
     const newAssignment = await db.Assignment.create(assignment);
+      var ass=[];
+      if(subject.assignments)
+      ass=[...subject.assignments];
+      ass.push(newAssignment);
+      subject.assignments=ass;
+      subject.save((err)=>{
+        if(err){
+          return res.status(500).json({
+            message: "Something went wrong when creating a new Assignemnt",
+          });
+        }
+        res.status(200).json(newAssignment);
+      })
+    
 
-    console.log("newAssignment created");
-    res.status(200).json(newAssignment);
+
   } catch (err) {
     console.log("Server error.", err);
     return res.status(500).json({
