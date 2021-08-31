@@ -14,6 +14,11 @@ const create = async (req, res) => {
   try {
     var subject=await db.Subject.findById(assignment.subject);
     // console.log(subject);
+    if(!subject){
+      return res.status(500).json({
+        message: "Subject Not found",
+      });
+    }
     const newAssignment = await db.Assignment.create(assignment);
       var ass=[];
       if(subject.assignments)
@@ -220,6 +225,38 @@ const deleteAssignment = async (req, res) => {
         message: "Assignment not found. Try again!",
       });
     }
+    if(deletedAssignment.subject){
+      var subj=deletedAssignment.subject;
+      await db.Subject.findById(subj.toString()).exec(async(err, subject)=>{
+        if(err){
+          return res.status(500).json({
+            message: "Something went wrong while deleting Assignment. Try again!",
+          });
+        }
+        var ass=[], newass=[];
+        if(subject.assignments){
+          ass=[...subject.assignments];
+        }
+
+        for(let j=0;j<ass.length;j++){
+          if(ass[j].toString()!==deletedAssignment._id.toString()){
+            newass.push(ass[j]);
+          }
+        }
+
+        subject.assignments=newass;
+        subject.save((err)=>{
+          if(err){
+            return res.status(500).json({
+              message: "Something went wrong while deleting Assignment. Try again!",
+            });
+          }
+        })
+
+      })
+    }
+
+
     res.status(200).json({
       message: "Successfully deleted the Assignment.",
     });
