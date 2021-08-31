@@ -27,7 +27,7 @@ const CreateClass = (p) => {
     }
     getDetails();
     return null;
-  }, [p.match.params.id]);
+  }, []);
 
   if (!isAuthorised()) {
     toast.error("Not authorised");
@@ -35,21 +35,27 @@ const CreateClass = (p) => {
   }
 
   const data = {
-    userId: p.match.params.id,
-    subjectName: subjectName,
-    description: description,
-    link: conferenceLink,
-    subjectCode: subjectCode,
+    teacher: p.match.params.id,
+    name: subjectName,
+    code: subjectCode,
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createSubject(data);
+    const error = await createSubject(data);
+    if (error === undefined) {
+      window.location = "/dashboard/" + p.match.params.id;
+      toast.success("Subject Created");
+    } else {
+      if (error.response && error.response.data) {
+        toast.error(error.response.data.message);
+      } else toast.error("Something went wrong");
+    }
   };
 
   return (
     <React.Fragment>
-      <Navbar details={userDetail} />
+      <Navbar {...p} details={userDetail} />
       <div
         className={`col-8 mx-auto my-2 border p-2 align-items-center ${styles.createClass}`}
       >

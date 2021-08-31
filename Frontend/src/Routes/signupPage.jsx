@@ -5,28 +5,35 @@ import styles from "../Components/styles/forms.module.css";
 import { register, isAuthorised } from "../Services/auth";
 
 const SignUpPage = (p) => {
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
 
   const data = {
     name: name,
     email: email,
     password: password,
-    isTeacher: role === "teacher" ? true : false,
+    isTeacher: role === "teacher" ? "true" : "false",
   };
 
   if (isAuthorised()) {
-    p.history.replace("/");
+    //p.history.replace("/");
     toast.success("Already Logged In....");
     return null;
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    register(data);
-    //window.location = "/login";
+    const error = await register(data);
+    if (error === undefined) {
+      window.location = "/login";
+    } else {
+      console.log("error");
+      if (error.response && error.response.data) {
+        toast.error(error.response.data.message);
+      } else toast.error("Something went wrong");
+    }
   };
 
   return (
@@ -53,7 +60,7 @@ const SignUpPage = (p) => {
                       <input
                         type="email"
                         className="form-control"
-                        id="floatingInput"
+                        id="floatingEmail"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Email address"
@@ -64,7 +71,7 @@ const SignUpPage = (p) => {
                       <input
                         type="text"
                         className="form-control"
-                        id="floatingInput"
+                        id="floatingName"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Username"
@@ -92,7 +99,7 @@ const SignUpPage = (p) => {
                         name="role"
                         required={true}
                       />
-                      <label className={styles.radio} for="teacher">
+                      <label className={styles.radio} htmlFor="teacher">
                         {" "}
                         &nbsp; Teacher
                       </label>
@@ -105,7 +112,7 @@ const SignUpPage = (p) => {
                         name="role"
                         required={true}
                       />
-                      <label className={styles.radio} for="student">
+                      <label className={styles.radio} htmlFor="student">
                         {" "}
                         &nbsp; Student
                       </label>

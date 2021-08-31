@@ -9,7 +9,8 @@ const Navbar = (props) => {
   const isTeacher = props.details.isTeacher;
   const name = "Hii " + props.details.name;
 
-  let id = props.details.id;
+  let id = props.match.params.id;
+  console.log("id2 is ", id);
   return (
     <React.Fragment>
       <nav

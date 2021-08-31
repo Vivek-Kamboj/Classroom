@@ -23,7 +23,7 @@ const LandingPage = (p) => {
     }
     getDetails();
     return null;
-  }, [p.match.params.id]);
+  }, []);
 
   if (!isAuthorised()) {
     return <Redirect to="/login" />;
@@ -31,8 +31,8 @@ const LandingPage = (p) => {
 
   return (
     <React.Fragment>
-      <NavBar details={userDetail} />
-      <Dashboard details={userDetail} />
+      <NavBar {...p} details={userDetail} />
+      <Dashboard {...p} details={userDetail} />
     </React.Fragment>
   );
 };

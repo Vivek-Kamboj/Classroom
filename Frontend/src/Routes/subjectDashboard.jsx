@@ -46,7 +46,7 @@ const SubjectDashboard = (p) => {
     }
     getDetails();
     return null;
-  }, [p.match.params.userID]);
+  });
 
   if (!isAuthorised()) {
     return <Redirect to="/login" />;

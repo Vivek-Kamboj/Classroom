@@ -1,4 +1,4 @@
-const backendURL = "";
+const backendURL = "http://localhost:4000/";
 
 export const registerUserUrl = () => {
   return backendURL + "api/user/signup";
@@ -13,15 +13,15 @@ export const getUserDataByIdUrl = (id) => {
 };
 
 export const createNewSubjectUrl = () => {
-  return backendURL + "api/subjects/create";
+  return backendURL + "api/subject/";
 };
 
 export const joinNewSubjectUrl = () => {
-  return backendURL + "api/subjects/join";
+  return backendURL + "api/subject/join";
 };
 
 export const getSubjectDataByIdUrl = (id) => {
-  return backendURL + "api/subjects/" + id;
+  return backendURL + "api/subject/" + id;
 };
 
 export const getAllStudentsByIdUrl = (id) => {
@@ -30,6 +30,12 @@ export const getAllStudentsByIdUrl = (id) => {
 
 const toExport = {
   registerUserUrl,
+  loginUserUrl,
+  getUserDataByIdUrl,
+  createNewSubjectUrl,
+  joinNewSubjectUrl,
+  getSubjectDataByIdUrl,
+  getAllStudentsByIdUrl,
 };
 
 export default toExport;

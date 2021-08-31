@@ -24,7 +24,7 @@ const JoinClass = (p) => {
     }
     getDetails();
     return null;
-  }, [p.match.params.id]);
+  }, []);
 
   if (!isAuthorised()) {
     toast.error("Not authorised");
@@ -33,12 +33,20 @@ const JoinClass = (p) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await joinSubject(subjectCode, userDetail.id);
+    const error = await joinSubject(subjectCode, userDetail.id);
+    if (error === undefined) {
+      window.location = "/dashboard/" + p.match.params.id;
+      toast.success("Subject Joined");
+    } else {
+      if (error.response && error.response.data) {
+        toast.error(error.response.data.message);
+      } else toast.error("Something went wrong");
+    }
   };
 
   return (
     <React.Fragment>
-      <Navbar details={userDetail} />
+      <Navbar {...p} details={userDetail} />
       <div
         className={`col-8 mx-auto my-2 border p-2 align-items-center ${styles.joinClass}`}
       >

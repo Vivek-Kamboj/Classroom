@@ -12,7 +12,7 @@ const Dashboard = (props) => {
             subjects.map((x) => (
               <SubjectCard
                 userID={props.details.id}
-                subID={x.id}
+                subID={x._id}
                 name={x.name}
                 faculty={x.faculty}
                 count={x.studentCount}

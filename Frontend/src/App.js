@@ -1,16 +1,19 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import LoginPage from "./Routes/loginPage";
 import LandingPage from "./Routes/landingPage";
 import SignUpPage from "./Routes/signupPage";
 import CreateClass from "./Components/createClass";
 import JoinClass from "./Components/joinClass";
 import SubjectDashboard from "./Routes/subjectDashboard";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 function App() {
   return (
     <div className="app">
       <Router>
+        <ToastContainer />
         <Switch>
           <Route path="/dashboard/:id" exact component={LandingPage} />
           <Route path="/login" exact component={LoginPage} />

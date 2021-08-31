@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import styles from "../Components/styles/forms.module.css";
 import { login, isAuthorised } from "../Services/auth";
+import jwt_decode from "jwt-decode";
 
 const LoginPage = (p) => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   if (isAuthorised()) {
-    //let id = jwtDecode(localStorage.getItem("token")).id;
-    let id = 123;
-    p.history.replace("/dashboard/" + id);
+    let id = jwt_decode(localStorage.getItem("token")).foo;
+    window.location.assign("/dashboard/" + id);
     toast.success("Already Logged In....");
     return null;
   }
@@ -20,8 +20,7 @@ const LoginPage = (p) => {
     e.preventDefault();
     const error = await login(email, password);
     if (error === undefined) {
-      //let id = jwtDecode(localStorage.getItem("token")).id;
-      let id = 123; //Remove later
+      let id = jwt_decode(localStorage.getItem("token")).foo;
       window.location = "/dashboard/" + id;
     } else {
       if (error.response && error.response.data) {
