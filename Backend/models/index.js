@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
-const dbUrl = "mongodb://localhost/classroom";
+require("dotenv").config();
+const dbUrl = process.env.MONGODB_URI;
 
 mongoose
   .connect(dbUrl, {
-    // useNewUrlParser: true,
-    // useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
     // useFindAndModify: false,
   })
   .then(() => console.log("MongoDB connected..."))
