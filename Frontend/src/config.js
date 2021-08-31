@@ -1,4 +1,4 @@
-const backendURL = "http://localhost:4000/";
+const backendURL = "https://classroom-backend.vercel.app/";
 
 export const registerUserUrl = () => {
   return backendURL + "api/user/signup";
