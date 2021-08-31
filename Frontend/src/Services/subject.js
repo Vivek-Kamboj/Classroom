@@ -13,6 +13,7 @@ export const createSubject = async (data, props) => {
     // props.history.push("/subject/" + x.data._id);
     console.log("Subject Created", data);
   } catch (e) {
+    console.log("error");
     err = e;
     if (e.response && e.response.data) {
       toast.error(e.response.data.message);
@@ -27,12 +28,13 @@ export const joinSubject = async (subjectCode, userId, props) => {
   try {
     //const x =
     await axios.post(config.joinNewSubjectUrl(), {
-      subjectCode: subjectCode,
-      userId: userId,
+      code: subjectCode,
+      studentId: userId,
     });
     // props.history.push("/subject/" + x.data._id);
-    console.log("Subject Joined", subjectCode);
+    // console.log("Subject Joined", subjectCode);
   } catch (e) {
+    console.log("error", e);
     err = e;
     if (e.response && e.response.data) {
       toast.error(e.response.data.message);

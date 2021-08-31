@@ -38,14 +38,16 @@ const CreateClass = (p) => {
     teacher: p.match.params.id,
     name: subjectName,
     code: subjectCode,
+    description: description,
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const error = await createSubject(data);
     if (error === undefined) {
-      window.location = "/dashboard/" + p.match.params.id;
+      console.log("subject created");
       toast.success("Subject Created");
+      window.location = "/dashboard/" + p.match.params.id;
     } else {
       if (error.response && error.response.data) {
         toast.error(error.response.data.message);

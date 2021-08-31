@@ -7,10 +7,15 @@ import { faUser, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = (props) => {
   const isTeacher = props.details.isTeacher;
-  const name = "Hii " + props.details.name;
+  const details =
+    "Hii " +
+    props.details.name +
+    "\n" +
+    props.details.email +
+    "\nRole : " +
+    (props.details.isTeacher ? "Teacher" : "Student");
 
   let id = props.match.params.id;
-  console.log("id2 is ", id);
   return (
     <React.Fragment>
       <nav
@@ -111,7 +116,8 @@ const Navbar = (props) => {
                 className="btn btn-dark"
                 data-toggle="tooltip"
                 data-placement="left"
-                title={name}
+                data-html="true"
+                title={details}
               >
                 <FontAwesomeIcon icon={faUser} />
               </button>

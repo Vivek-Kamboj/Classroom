@@ -33,10 +33,10 @@ const JoinClass = (p) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const error = await joinSubject(subjectCode, userDetail.id);
+    const error = await joinSubject(subjectCode, userDetail._id);
     if (error === undefined) {
-      window.location = "/dashboard/" + p.match.params.id;
       toast.success("Subject Joined");
+      window.location = "/dashboard/" + p.match.params.id;
     } else {
       if (error.response && error.response.data) {
         toast.error(error.response.data.message);

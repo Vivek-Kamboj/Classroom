@@ -46,23 +46,39 @@ const SubjectDashboard = (p) => {
     }
     getDetails();
     return null;
-  });
+  }, []);
 
   if (!isAuthorised()) {
     return <Redirect to="/login" />;
   }
 
+  console.log(subjectDetail);
   return (
     <React.Fragment>
-      <NavBar details={userDetail} />
+      <NavBar {...p} details={userDetail} />
       <div className={`col-md-10 m-auto border ${styles.container}`}>
-        <h5>Faculty name : {subjectDetail.faculty}</h5>
+        <h5>Subject name : {subjectDetail.name}</h5>
+        <p> Description: {subjectDetail.description}</p>
         <br />
-        <h5>Description : {subjectDetail.description}</h5>
+        <h5>
+          {" "}
+          Faculty Name : {subjectDetail.teacher && subjectDetail.teacher.name}
+        </h5>
+        <h6>
+          {" "}
+          For any subject related queries, contact at{" "}
+          {subjectDetail.teacher && subjectDetail.teacher.email}
+        </h6>
+        <br />
+        <p>
+          Total no. of student :{" "}
+          {subjectDetail.students && subjectDetail.students.length}
+        </p>
         <br />
         <h5> List of Students :</h5>
         <br />
-        {allStudents && allStudents.map((x) => <li> {x} </li>)}
+        {subjectDetail.students &&
+          subjectDetail.students.map((x) => <li> {x} </li>)}
       </div>
     </React.Fragment>
   );
