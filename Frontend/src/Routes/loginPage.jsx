@@ -11,7 +11,7 @@ const LoginPage = (p) => {
 
   if (isAuthorised()) {
     let id = jwt_decode(localStorage.getItem("token")).foo;
-    window.location.assign("/dashboard/" + id);
+    window.location.assign("/dashboard/user/" + id);
     toast.success("Already Logged In....");
     return null;
   }
@@ -21,7 +21,7 @@ const LoginPage = (p) => {
     const error = await login(email, password);
     if (error === undefined) {
       let id = jwt_decode(localStorage.getItem("token")).foo;
-      window.location = "/dashboard/" + id;
+      window.location = "/dashboard/user/" + id;
     } else {
       if (error.response && error.response.data) {
         toast.error(error.response.data.message);

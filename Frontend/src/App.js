@@ -28,11 +28,11 @@ function App() {
               return <Redirect to="/login" />;
             }}
           />
-          <Route path="/dashboard/:id" exact component={LandingPage} />
+          <Route path="/dashboard/user/:id" exact component={LandingPage} />
           <Route path="/login" exact component={LoginPage} />
           <Route path="/signup" exact component={SignUpPage} />
-          <Route path="/createClass/:id" exact component={CreateClass} />
-          <Route path="/joinClass/:id" exact component={JoinClass} />
+          <Route path="/user/:id/createClass" exact component={CreateClass} />
+          <Route path="/user/:id/joinClass" exact component={JoinClass} />
           <Route
             path="/user/:userID/subject/:subID"
             exact

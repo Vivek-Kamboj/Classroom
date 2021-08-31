@@ -35,8 +35,8 @@ const JoinClass = (p) => {
     e.preventDefault();
     const error = await joinSubject(subjectCode, userDetail._id);
     if (error === undefined) {
+      window.location = "/dashboard/user/" + p.match.params.id;
       toast.success("Subject Joined");
-      window.location = "/dashboard/" + p.match.params.id;
     } else {
       if (error.response && error.response.data) {
         toast.error(error.response.data.message);

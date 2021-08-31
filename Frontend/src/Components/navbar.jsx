@@ -4,6 +4,7 @@ import styles from "./styles/navbar.module.css";
 import { logout } from "../Services/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faPlus } from "@fortawesome/free-solid-svg-icons";
+import jwt_decode from "jwt-decode";
 
 const Navbar = (props) => {
   const isTeacher = props.details.isTeacher;
@@ -15,7 +16,7 @@ const Navbar = (props) => {
     "\nRole : " +
     (props.details.isTeacher ? "Teacher" : "Student");
 
-  let id = props.match.params.id;
+  let id = jwt_decode(localStorage.getItem("token")).foo;
   return (
     <React.Fragment>
       <nav
@@ -23,7 +24,7 @@ const Navbar = (props) => {
       >
         <Link
           to={{
-            pathname: "/dashboard/" + id,
+            pathname: "/dashboard/user/" + id,
           }}
           className={`navbar-brand ${styles.brand}`}
         >
@@ -58,7 +59,7 @@ const Navbar = (props) => {
                 >
                   <Link
                     to={{
-                      pathname: "/createClass/" + id,
+                      pathname: "/user/" + id + "/createClass/",
                       details: props.details,
                     }}
                     className={styles.navLink}
@@ -79,7 +80,7 @@ const Navbar = (props) => {
                 >
                   <Link
                     to={{
-                      pathname: "/joinClass/" + id,
+                      pathname: "/user/" + id + "/joinClass/",
                       details: props.details,
                     }}
                     className={styles.navLink}

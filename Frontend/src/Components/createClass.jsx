@@ -46,8 +46,8 @@ const CreateClass = (p) => {
     const error = await createSubject(data);
     if (error === undefined) {
       console.log("subject created");
+      window.location = "/dashboard/user/" + p.match.params.id;
       toast.success("Subject Created");
-      window.location = "/dashboard/" + p.match.params.id;
     } else {
       if (error.response && error.response.data) {
         toast.error(error.response.data.message);

@@ -42,7 +42,6 @@ export const getUserDetails = async (id) => {
   try {
     const data = await axios.get(config.getUserDataByIdUrl(id));
     dataToSend = data.data;
-    console.log("User data sent");
   } catch (error) {
     err = error;
   }

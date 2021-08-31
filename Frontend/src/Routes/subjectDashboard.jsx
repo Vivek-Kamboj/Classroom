@@ -75,10 +75,10 @@ const SubjectDashboard = (p) => {
           {subjectDetail.students && subjectDetail.students.length}
         </p>
         <br />
-        <h5> List of Students :</h5>
+        {/* <h5> List of Students :</h5>
         <br />
         {subjectDetail.students &&
-          subjectDetail.students.map((x) => <li> {x} </li>)}
+          subjectDetail.students.map((x) => <li> {x} </li>)} */}
       </div>
     </React.Fragment>
   );
