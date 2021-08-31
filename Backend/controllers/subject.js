@@ -1,15 +1,36 @@
 const db = require("../models");
 
 const create = async (req, res) => {
-  var subject = { ...req.body };
+  var subject = { ...req.body, students:[], assignments:[] , tests:[]};
   if (!subject.name || !subject.teacher || !subject.code) {
     return res.status(400).json({ message: "All fields are required" });
   }
-  console.log(subject);
   try {
+    
     const newSubject = await db.Subject.create(subject);
+    
+    await db.User.findById(subject.teacher).exec(async(err, teacher)=>{
+      if(err){
+        return res.status(500).json({
+          message: "Something went wrong when creating a new Subject",
+        });
+      }
+      var subj=[];
+      if(teacher.subjects){
+        subj=[...teacher.subjects]
+      }
+      subj.push(newSubject);
+      teacher.subjects=subj;
+      await teacher.save((err)=>{
+        if(err){
+          return res.status(500).json({
+            message: "Something went wrong when creating a new Subject",
+          });
+        }
+      })
 
-    console.log("newSubject created");
+    })
+
     res.status(200).json(newSubject);
   } catch (err) {
     console.log("Server error.", err);
@@ -136,6 +157,7 @@ const deleteSubject = async (req, res) => {
         message: "Subject not found. Try again!",
       });
     }
+    console.log(deletedSubject)
     res.status(200).json({
       message: "Successfully deleted the Subject.",
     });
