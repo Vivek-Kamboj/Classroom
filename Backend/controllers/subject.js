@@ -171,7 +171,7 @@ const deleteSubject = async (req, res) => {
         }
         var subj=[], newSubj=[];
         if(user.subject){
-          subj=[...user.subject];
+          subj=[...user.subjects];
         }
         for(let j=0;j<subj.length;j++){
           if(subj[j].toString()!==deletedSubject._id.toString()){
