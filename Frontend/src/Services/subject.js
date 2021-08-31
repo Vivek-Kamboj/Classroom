@@ -13,7 +13,6 @@ export const createSubject = async (data, props) => {
     // props.history.push("/subject/" + x.data._id);
     console.log("Subject Created", data);
   } catch (e) {
-    console.log("error");
     err = e;
     if (e.response && e.response.data) {
       toast.error(e.response.data.message);
@@ -50,7 +49,7 @@ export const getSubjectDetails = async (id) => {
   try {
     const data = await axios.get(config.getSubjectDataByIdUrl(id));
     dataToSend = data.data;
-    console.log("Subject data sent");
+    //console.log("Subject data sent");
   } catch (error) {
     err = error;
   }

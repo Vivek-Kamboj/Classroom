@@ -52,7 +52,6 @@ const SubjectDashboard = (p) => {
     return <Redirect to="/login" />;
   }
 
-  console.log(subjectDetail);
   return (
     <React.Fragment>
       <NavBar {...p} details={userDetail} />
@@ -71,10 +70,59 @@ const SubjectDashboard = (p) => {
         </h6>
         <br />
         <p>
-          Total no. of student :{" "}
+          Total no. of students :{" "}
           {subjectDetail.students && subjectDetail.students.length}
         </p>
         <br />
+
+        <button
+          className="btn btn-info m-2"
+          onClick={() => {
+            p.history.push("/admin/new");
+          }}
+        >
+          View Assignments
+        </button>
+        <button
+          className="btn btn-info"
+          onClick={() => {
+            p.history.push("/admin/campaign/new");
+          }}
+        >
+          View Tests
+        </button>
+
+        <button
+          className="btn btn-warning m-2"
+          onClick={() => {
+            p.history.push("/all-campaigns");
+          }}
+        >
+          List of Students
+        </button>
+
+        {userDetail.isTeacher && (
+          <button
+            className="btn btn-primary m-2"
+            onClick={() => {
+              p.history.push("/all-campaigns");
+            }}
+          >
+            Edit Subject Details
+          </button>
+        )}
+
+        {userDetail.isTeacher && (
+          <button
+            className="btn btn-danger m-2"
+            onClick={() => {
+              p.history.push("/all-campaigns");
+            }}
+          >
+            Delete Subject
+          </button>
+        )}
+
         {/* <h5> List of Students :</h5>
         <br />
         {subjectDetail.students &&

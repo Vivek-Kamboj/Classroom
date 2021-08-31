@@ -93,7 +93,7 @@ const Navbar = (props) => {
 
             <li className={` nav-item ${styles.item}`}>
               <a className="nav-link">
-                <Link to="/" className={styles.navLink}>
+                <Link to="/calender" className={styles.navLink}>
                   Calender
                 </Link>
               </a>
