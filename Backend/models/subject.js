@@ -33,12 +33,6 @@ const SubjectSchema = mongoose.Schema({
       ref: "Assignment",
     },
   ],
-  tests: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Test",
-    },
-  ],
 });
 
 const Subject = mongoose.model("Subject", SubjectSchema);

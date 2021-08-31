@@ -1,7 +1,7 @@
 const db = require("../models");
 
 const create = async (req, res) => {
-  var subject = { ...req.body, students:[], assignments:[] , tests:[]};
+  var subject = { ...req.body, students:[], assignments:[] };
   if (!subject.name || !subject.teacher || !subject.code) {
     return res.status(400).json({ message: "All fields are required" });
   }

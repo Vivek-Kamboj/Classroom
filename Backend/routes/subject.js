@@ -12,6 +12,6 @@ router.post("/join", mw.auth.verify, ctrl.subject.join);
 // Update Subject
 router.put("/:subjectId", mw.auth.verify, ctrl.subject.update);
 // Delete Subject
-router.delete("/:subjectId", mw.auth.verify, ctrl.subject.deleteSubject);// baccha hai!
+router.delete("/:subjectId", mw.auth.verify, ctrl.subject.deleteSubject);
 
 module.exports = router;
