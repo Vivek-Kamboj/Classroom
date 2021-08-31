@@ -14,5 +14,4 @@ module.exports = {
   User: require("./User"),
   Subject: require("./subject"),
   Assignment: require("./assignment"),
-  Test: require("./test"),
 };

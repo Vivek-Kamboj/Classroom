@@ -16,6 +16,5 @@ router.put("/:assignmentId/response", mw.auth.verify, ctrl.assignment.mark);
 // Update Assignment
 router.put("/:assignmentId", mw.auth.verify, ctrl.assignment.update);
 // Delete Assignment
-router.delete("/:assignmentId", mw.auth.verify, ctrl.assignment.deleteAssignment);// bacha hai
-
+router.delete("/:assignmentId", mw.auth.verify, ctrl.assignment.deleteAssignment);
 module.exports = router;

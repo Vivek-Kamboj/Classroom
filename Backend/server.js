@@ -12,7 +12,6 @@ app.use(cors());
 app.use("/api/user", routes.user);
 app.use("/api/subject", routes.subject);
 app.use("/api/assignment", routes.assignment);
-app.use("/api/test", routes.test);
 // Calender--future Scope
 // Video Conferencing--future Scope
 
