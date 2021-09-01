@@ -37,10 +37,10 @@ A web-application where teachers can take online classes for students.
 *<p align = "center"> Fig. 5: Join Class for student </p>*
 
 ![](Image/viewAsStudent.JPG)
-*<p align = "center"> Fig. 6: Subject Dashboard (Teacher) </p>*
+*<p align = "center"> Fig. 6: Subject Dashboard (Student) </p>*
 
 ![](Image/viewAsTeacher.JPG)
-*<p align = "center"> Fig. 7: Subject Dashboard (Student) </p>*
+*<p align = "center"> Fig. 7: Subject Dashboard (Teacher) </p>*
 
 ## SetUp Instructions
 
